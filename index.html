@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Fattoush Restaurant & Banquet - Authentic Arabian Flavours in Chennai. Mandi, Al Faham, BBQ, Grills, Shawarma, Kebabs and more. Reserve your table today.">
+<title>Fattoush Restaurant & Banquet | Authentic Arabian Cuisine Chennai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #E67E22;
+  --maroon: #8B1E3F;
+  --gold: #D4AF37;
+  --cream: #F8F3E9;
+  --cream-dark: #F0E8D5;
+  --charcoal: #2D2D2D;
+  --white: #FFFFFF;
+  --text-muted: #6B6B6B;
+  --card-shadow: 0 8px 32px rgba(139,30,63,0.10);
+  --transition: 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  overflow-x: hidden;
+}
+
+/* ── LOADER ── */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--maroon);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.5rem;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; color: var(--gold); letter-spacing: 2px; text-align: center;
+}
+.loader-sub { font-family: 'Amiri', serif; color: rgba(212,175,55,0.7); font-size: 1rem; letter-spacing: 3px; }
+.loader-bar {
+  width: 180px; height: 2px; background: rgba(212,175,55,0.2); border-radius: 2px; overflow: hidden;
+}
+.loader-fill {
+  height: 100%; width: 0; background: var(--gold); border-radius: 2px;
+  animation: loadFill 1.8s ease forwards;
+}
+@keyframes loadFill { to { width: 100%; } }
+
+/* ── GEOMETRIC PATTERN BG ── */
+.geo-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D4AF37' stroke-width='0.4' opacity='0.18'%3E%3Cpolygon points='30,2 58,18 58,42 30,58 2,42 2,18'/%3E%3Cpolygon points='30,10 50,22 50,38 30,50 10,38 10,22'/%3E%3Cline x1='30' y1='2' x2='30' y2='58'/%3E%3Cline x1='2' y1='18' x2='58' y2='42'/%3E%3Cline x1='58' y1='18' x2='2' y2='42'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: var(--transition);
+}
+nav.scrolled {
+  background: rgba(248,243,233,0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 24px rgba(139,30,63,0.1);
+  padding: 0.7rem 2rem;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1px;
+  transition: var(--transition);
+}
+nav.scrolled .nav-logo { color: var(--maroon); }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.9); text-decoration: none;
+  position: relative; padding-bottom: 2px;
+  transition: var(--transition);
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px;
+  background: var(--gold); transition: var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+nav.scrolled .nav-links a { color: var(--charcoal); }
+.nav-cta {
+  background: var(--gold); color: var(--maroon) !important;
+  padding: 0.5rem 1.2rem; border-radius: 30px;
+  font-weight: 600 !important; font-size: 0.82rem !important;
+  transition: var(--transition) !important;
+}
+.nav-cta:hover { background: var(--maroon) !important; color: var(--white) !important; transform: translateY(-1px); }
+.nav-cta::after { display: none !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+nav.scrolled .hamburger span { background: var(--maroon); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1a0a0f 0%, #3d1020 30%, #8B1E3F 60%, #E67E22 100%);
+}
+.hero-image {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80');
+  background-size: cover; background-position: center;
+  opacity: 0.22;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+.hero-image.loaded { transform: scale(1); }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(26,10,15,0.82) 0%, rgba(139,30,63,0.65) 60%, rgba(230,126,34,0.4) 100%);
+}
+.hero-particles { position: absolute; inset: 0; pointer-events: none; }
+.particle {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.8), transparent);
+  animation: float linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; max-width: 820px; padding: 0 1.5rem;
+}
+.hero-eyebrow {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem; color: var(--gold); letter-spacing: 4px;
+  margin-bottom: 1.2rem; opacity: 0;
+  animation: fadeUp 0.8s ease 2s forwards;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700; line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 1.2rem; opacity: 0;
+  animation: fadeUp 0.8s ease 2.2s forwards;
+}
+.hero-title em { color: var(--gold); font-style: italic; }
+.hero-sub {
+  font-size: 1.05rem; color: rgba(255,255,255,0.82);
+  margin-bottom: 2.2rem; line-height: 1.7; opacity: 0;
+  animation: fadeUp 0.8s ease 2.4s forwards;
+}
+.hero-btns {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 3rem; opacity: 0;
+  animation: fadeUp 0.8s ease 2.6s forwards;
+}
+.btn-primary {
+  background: var(--gold); color: var(--maroon);
+  padding: 0.85rem 2rem; border-radius: 50px;
+  font-weight: 600; font-size: 0.92rem; letter-spacing: 0.5px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: var(--transition); display: inline-flex; align-items: center; gap: 0.5rem;
+  box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+}
+.btn-primary:hover { background: var(--white); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,175,55,0.4); }
+.btn-outline {
+  background: transparent; color: var(--white);
+  padding: 0.85rem 2rem; border-radius: 50px;
+  font-weight: 500; font-size: 0.92rem; letter-spacing: 0.5px;
+  text-decoration: none; border: 1.5px solid rgba(255,255,255,0.5); cursor: pointer;
+  transition: var(--transition); display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+.hero-badges {
+  display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 2.8s forwards;
+}
+.badge {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 30px; padding: 0.4rem 1rem;
+  font-size: 0.78rem; color: var(--white); font-weight: 500;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.badge .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: rgba(255,255,255,0.6); font-size: 0.72rem; letter-spacing: 2px;
+  opacity: 0; animation: fadeUp 0.8s ease 3.2s forwards;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION COMMONS ── */
+section { padding: 6rem 2rem; }
+.section-label {
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem; letter-spacing: 4px; color: var(--orange);
+  text-transform: uppercase; margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.section-label::before, .section-label::after {
+  content: ''; flex: 1 1 30px; max-width: 40px; height: 1px; background: var(--orange); opacity: 0.5;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700;
+  color: var(--maroon); line-height: 1.25;
+}
+.section-title em { color: var(--orange); font-style: italic; }
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+.section-sub {
+  color: var(--text-muted); font-size: 1rem; max-width: 560px; margin: 0.8rem auto 0; line-height: 1.7;
+}
+
+/* ── ABOUT ── */
+#about {
+  background: var(--cream);
+  position: relative; overflow: hidden;
+}
+#about .geo-bg {
+  position: absolute; inset: 0; pointer-events: none;
+}
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  max-width: 1200px; margin: 0 auto; align-items: center; position: relative;
+}
+.about-img-wrap {
+  position: relative; border-radius: 20px; overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+.about-img-wrap img {
+  width: 100%; height: 480px; object-fit: cover; display: block;
+  transition: transform 0.6s ease;
+}
+.about-img-wrap:hover img { transform: scale(1.04); }
+.about-img-badge {
+  position: absolute; bottom: 1.5rem; left: 1.5rem;
+  background: var(--maroon); color: var(--gold);
+  padding: 0.8rem 1.2rem; border-radius: 12px;
+  font-family: 'Playfair Display', serif;
+}
+.about-img-badge strong { font-size: 1.5rem; display: block; }
+.about-img-badge span { font-size: 0.75rem; letter-spacing: 1px; opacity: 0.85; }
+.about-text .section-label { justify-content: flex-start; }
+.about-text .section-label::before { display: none; }
+.about-text .section-title { text-align: left; margin-bottom: 1rem; }
+.about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+.about-text p strong { color: var(--maroon); }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem;
+}
+.stat-card {
+  background: var(--white); border-radius: 14px;
+  padding: 1.2rem; text-align: center;
+  border: 1px solid rgba(212,175,55,0.2);
+  box-shadow: 0 4px 16px rgba(139,30,63,0.06);
+}
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700; color: var(--maroon);
+  line-height: 1;
+}
+.stat-number sup { font-size: 1rem; color: var(--orange); }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+/* ── DISHES ── */
+#dishes { background: var(--white); }
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.8rem; max-width: 1200px; margin: 0 auto;
+}
+.dish-card {
+  background: var(--cream); border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(139,30,63,0.08);
+  transition: var(--transition); position: relative;
+}
+.dish-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(139,30,63,0.16); }
+.dish-img {
+  width: 100%; height: 220px; object-fit: cover;
+  display: block; transition: transform 0.5s ease;
+}
+.dish-card:hover .dish-img { transform: scale(1.06); }
+.dish-img-wrap { overflow: hidden; position: relative; }
+.dish-tag {
+  position: absolute; top: 1rem; right: 1rem;
+  background: var(--gold); color: var(--maroon);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px;
+  padding: 0.3rem 0.7rem; border-radius: 20px;
+}
+.dish-body { padding: 1.4rem; }
+.dish-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 600; color: var(--maroon); margin-bottom: 0.4rem;
+}
+.dish-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+.dish-footer { display: flex; align-items: center; justify-content: space-between; }
+.dish-price { font-weight: 700; font-size: 1.1rem; color: var(--orange); }
+.dish-price span { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
+.btn-sm {
+  background: var(--maroon); color: var(--white);
+  padding: 0.5rem 1.1rem; border-radius: 25px;
+  font-size: 0.8rem; font-weight: 500; text-decoration: none;
+  border: none; cursor: pointer; transition: var(--transition);
+}
+.btn-sm:hover { background: var(--orange); transform: scale(1.04); }
+
+/* ── WHY CHOOSE ── */
+#why { background: var(--cream); position: relative; overflow: hidden; }
+.why-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+}
+.why-card {
+  background: var(--white); border-radius: 18px; padding: 2rem;
+  border: 1px solid rgba(212,175,55,0.15);
+  box-shadow: 0 4px 20px rgba(139,30,63,0.06);
+  transition: var(--transition); position: relative; overflow: hidden;
+}
+.why-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--gold));
+  transform: scaleX(0); transform-origin: left; transition: var(--transition);
+}
+.why-card:hover::before { transform: scaleX(1); }
+.why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(139,30,63,0.12); }
+.why-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--maroon), var(--orange));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin-bottom: 1.2rem;
+}
+.why-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 600; color: var(--maroon); margin-bottom: 0.5rem;
+}
+.why-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.65; }
+
+/* ── MENU TABS ── */
+#menu { background: var(--maroon); position: relative; overflow: hidden; }
+#menu .section-title { color: var(--gold); }
+#menu .section-label { color: var(--gold); opacity: 0.8; }
+#menu .section-label::before, #menu .section-label::after { background: var(--gold); }
+#menu .section-sub { color: rgba(255,255,255,0.65); }
+.geo-overlay {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D4AF37' stroke-width='0.8'%3E%3Cpolygon points='30,2 58,18 58,42 30,58 2,42 2,18'/%3E%3C/g%3E%3C/svg%3E");
+}
+.tabs {
+  display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.tab-btn {
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(212,175,55,0.2); border-radius: 30px;
+  padding: 0.55rem 1.3rem; font-size: 0.83rem; font-weight: 500; font-family: 'Poppins', sans-serif;
+  cursor: pointer; transition: var(--transition);
+}
+.tab-btn:hover { background: rgba(212,175,55,0.15); color: var(--gold); }
+.tab-btn.active { background: var(--gold); color: var(--maroon); border-color: var(--gold); font-weight: 600; }
+.tab-content { display: none; max-width: 1100px; margin: 0 auto; }
+.tab-content.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.menu-item {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 16px; overflow: hidden; transition: var(--transition);
+}
+.menu-item:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+.menu-item img { width: 100%; height: 170px; object-fit: cover; display: block; }
+.menu-item-body { padding: 1.1rem; }
+.menu-item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: var(--white); margin-bottom: 0.3rem;
+}
+.menu-item-price { font-size: 0.95rem; font-weight: 600; color: var(--gold); }
+
+/* ── BANQUET ── */
+#banquet {
+  position: relative; overflow: hidden;
+  padding: 0; min-height: 600px;
+  display: flex; align-items: stretch;
+}
+.banquet-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1600&q=80');
+  background-size: cover; background-position: center;
+}
+.banquet-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(139,30,63,0.92) 0%, rgba(139,30,63,0.85) 50%, rgba(139,30,63,0.4) 100%);
+}
+.banquet-content {
+  position: relative; z-index: 2;
+  padding: 6rem 2rem; max-width: 640px; margin-left: max(2rem, calc((100% - 1200px) / 2 + 2rem));
+}
+.banquet-content .section-label { color: var(--gold); justify-content: flex-start; }
+.banquet-content .section-label::before { display: none; }
+.banquet-content .section-title { color: var(--white); text-align: left; margin-bottom: 1rem; }
+.banquet-content p { color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 2rem; }
+.banquet-features {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 2.5rem;
+}
+.banquet-feature {
+  display: flex; align-items: center; gap: 0.6rem;
+  color: rgba(255,255,255,0.85); font-size: 0.88rem;
+}
+.banquet-feature::before {
+  content: ''; width: 8px; height: 8px; background: var(--gold);
+  border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── GALLERY ── */
+#gallery { background: var(--cream-dark); }
+.gallery-filter {
+  display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;
+}
+.filter-btn {
+  background: var(--white); color: var(--charcoal);
+  border: 1px solid rgba(139,30,63,0.15); border-radius: 25px;
+  padding: 0.4rem 1.1rem; font-size: 0.82rem; font-family: 'Poppins', sans-serif;
+  cursor: pointer; transition: var(--transition);
+}
+.filter-btn:hover, .filter-btn.active { background: var(--maroon); color: var(--white); border-color: var(--maroon); }
+.masonry {
+  columns: 4 240px; gap: 1rem; max-width: 1200px; margin: 0 auto;
+}
+.masonry-item {
+  break-inside: avoid; margin-bottom: 1rem;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 4px 16px rgba(139,30,63,0.1);
+  cursor: pointer; transition: var(--transition); position: relative;
+}
+.masonry-item::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(139,30,63,0.5);
+  opacity: 0; transition: var(--transition);
+}
+.masonry-item:hover::after { opacity: 1; }
+.masonry-item:hover { transform: scale(1.02); }
+.masonry-item img { width: 100%; display: block; }
+
+/* ── REVIEWS ── */
+#reviews { background: var(--white); }
+.reviews-carousel { max-width: 1100px; margin: 0 auto; position: relative; }
+.reviews-track {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.review-card {
+  background: var(--cream); border-radius: 18px;
+  padding: 1.8rem; border: 1px solid rgba(212,175,55,0.15);
+  box-shadow: 0 4px 20px rgba(139,30,63,0.06);
+  transition: var(--transition);
+}
+.review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(139,30,63,0.12); }
+.review-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+.review-text { font-size: 0.9rem; color: var(--charcoal); line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+.review-footer { display: flex; align-items: center; gap: 0.8rem; }
+.review-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--maroon), var(--orange));
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-weight: 600; font-size: 0.9rem; flex-shrink: 0;
+}
+.review-name { font-weight: 600; font-size: 0.9rem; color: var(--maroon); }
+.review-date { font-size: 0.75rem; color: var(--text-muted); }
+.review-google {
+  margin-left: auto; font-size: 0.75rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 0.3rem;
+}
+
+/* ── LOCATION ── */
+#location { background: var(--cream); }
+.location-grid {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem;
+  max-width: 1200px; margin: 0 auto; align-items: start;
+}
+.location-info { }
+.location-info .section-label { justify-content: flex-start; }
+.location-info .section-label::before { display: none; }
+.location-info .section-title { text-align: left; margin-bottom: 1.5rem; }
+.info-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  margin-bottom: 1.5rem; padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(139,30,63,0.08);
+}
+.info-item:last-of-type { border-bottom: none; }
+.info-icon {
+  width: 44px; height: 44px; background: var(--maroon); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 1.1rem;
+}
+.info-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
+.info-value { font-weight: 500; color: var(--charcoal); font-size: 0.92rem; line-height: 1.5; }
+.location-btns { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
+.btn-wa {
+  background: #25D366; color: var(--white);
+  padding: 0.85rem 1.5rem; border-radius: 12px;
+  font-weight: 600; font-size: 0.9rem;
+  text-decoration: none; display: flex; align-items: center; gap: 0.7rem;
+  transition: var(--transition); justify-content: center;
+}
+.btn-wa:hover { background: #1da851; transform: translateY(-2px); }
+.btn-call {
+  background: var(--maroon); color: var(--white);
+  padding: 0.85rem 1.5rem; border-radius: 12px;
+  font-weight: 600; font-size: 0.9rem;
+  text-decoration: none; display: flex; align-items: center; gap: 0.7rem;
+  transition: var(--transition); justify-content: center;
+}
+.btn-call:hover { background: var(--orange); transform: translateY(-2px); }
+.btn-dir {
+  background: var(--white); color: var(--maroon);
+  border: 1.5px solid var(--maroon);
+  padding: 0.85rem 1.5rem; border-radius: 12px;
+  font-weight: 600; font-size: 0.9rem;
+  text-decoration: none; display: flex; align-items: center; gap: 0.7rem;
+  transition: var(--transition); justify-content: center;
+}
+.btn-dir:hover { background: var(--cream); transform: translateY(-2px); }
+.map-wrap {
+  border-radius: 20px; overflow: hidden;
+  box-shadow: var(--card-shadow); height: 460px;
+}
+.map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* ── FOOTER ── */
+footer {
+  background: #2D0D1C; color: rgba(255,255,255,0.8);
+  padding: 4rem 2rem 2rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem;
+  max-width: 1200px; margin: 0 auto; padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+.footer-brand .nav-logo { color: var(--gold); font-size: 1.7rem; display: block; margin-bottom: 0.8rem; }
+.footer-brand p { font-size: 0.87rem; line-height: 1.7; color: rgba(255,255,255,0.6); max-width: 280px; }
+.footer-social { display: flex; gap: 0.7rem; margin-top: 1.2rem; }
+.social-btn {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(212,175,55,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); text-decoration: none; font-size: 0.9rem;
+  transition: var(--transition);
+}
+.social-btn:hover { background: var(--gold); color: var(--maroon); }
+.footer-col h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: var(--gold); margin-bottom: 1.2rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul li a {
+  color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.87rem;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: var(--gold); }
+.newsletter-form { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+.newsletter-form input {
+  flex: 1; padding: 0.65rem 1rem; border-radius: 10px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(212,175,55,0.2);
+  color: var(--white); font-family: 'Poppins', sans-serif; font-size: 0.85rem;
+  outline: none;
+}
+.newsletter-form input::placeholder { color: rgba(255,255,255,0.4); }
+.newsletter-form button {
+  background: var(--gold); color: var(--maroon); border: none; cursor: pointer;
+  padding: 0.65rem 1rem; border-radius: 10px; font-weight: 600; font-size: 0.85rem;
+  transition: var(--transition);
+}
+.newsletter-form button:hover { background: var(--orange); color: var(--white); }
+.footer-bottom {
+  max-width: 1200px; margin: 2rem auto 0;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+  font-size: 0.82rem; color: rgba(255,255,255,0.4);
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .location-grid { grid-template-columns: 1fr; }
+  .reviews-track { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .banquet-content { margin-left: 2rem; }
+}
+@media (max-width: 600px) {
+  nav { padding: 1rem; }
+  nav.scrolled { padding: 0.7rem 1rem; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; gap: 1rem;
+    position: fixed; top: 60px; left: 0; right: 0;
+    background: var(--cream); padding: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+  .nav-links.open a { color: var(--charcoal); font-size: 1rem; }
+  .hamburger { display: flex; }
+  section { padding: 4rem 1.2rem; }
+  .reviews-track { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .masonry { columns: 2 160px; }
+  .banquet-features { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── ORNAMENT DIVIDER ── */
+.ornament {
+  text-align: center; color: var(--gold); font-size: 1.4rem;
+  margin: 0.5rem 0 1rem; opacity: 0.6;
+  font-family: 'Amiri', serif; letter-spacing: 8px;
+}
+
+/* ── LIGHTBOX ── */
+#lightbox {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.92); display: none;
+  align-items: center; justify-content: center; padding: 2rem;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: 90vw; max-height: 85vh; object-fit: contain;
+  border-radius: 12px; box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+}
+#lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: rgba(255,255,255,0.1); border: none; color: var(--white);
+  width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem;
+  cursor: pointer; transition: var(--transition);
+}
+#lightbox-close:hover { background: var(--maroon); }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">Fattoush<br><small style="font-size:1rem;letter-spacing:4px;color:rgba(212,175,55,0.7);">RESTAURANT & BANQUET</small></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-sub">Authentic Arabian Flavours</div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Fattoush <span>&</span> Banquet</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#dishes">Dishes</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#banquet">Banquet</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="tel:+919876543210" class="nav-cta">Reserve Table</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-image" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">&#x2022; Est. 2014 &nbsp;&#x2022;&nbsp; Chennai, Tamil Nadu &#x2022;</div>
+    <h1 class="hero-title">Authentic Arabian <em>Flavours,</em><br>Crafted For Every Celebration</h1>
+    <p class="hero-sub">Experience the finest Mandi, Grills, BBQ and Family Dining in Chennai.<br>Where every meal is a journey through the heart of Arabia.</p>
+    <div class="hero-btns">
+      <a href="#location" class="btn-primary">🍽 Reserve Table</a>
+      <a href="#menu" class="btn-outline">Explore Menu ›</a>
+    </div>
+    <div class="hero-badges">
+      <div class="badge"><div class="dot"></div>⭐ 5.0 Google Rating</div>
+      <div class="badge"><div class="dot"></div>1000+ Happy Customers</div>
+      <div class="badge"><div class="dot"></div>Family Dining</div>
+      <div class="badge"><div class="dot"></div>Banquet Hall Available</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="geo-bg"></div>
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Fattoush Restaurant interior — warm Arabian dining ambience" loading="lazy">
+      <div class="about-img-badge">
+        <strong>10+</strong>
+        <span>Years of Excellence</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="reveal">
+        <div class="section-label">Our Story</div>
+        <div class="ornament">❧ ✦ ❧</div>
+        <h2 class="section-title">A Taste of <em>Arabia</em><br>in the Heart of Chennai</h2>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <p>Founded with a deep passion for authentic Arabian hospitality, <strong>Fattoush Restaurant & Banquet</strong> has been serving the flavours of the Middle East to Chennai for over a decade. Our chefs bring time-honoured recipes from Saudi Arabia, Yemen, and the Levant directly to your table.</p>
+        <p>From the slow-cooked tenderness of our signature <strong>Mandi platters</strong> to the smoky perfection of our Al Faham grills, every dish is crafted with the finest imported spices and locally sourced fresh ingredients — because great food begins with great care.</p>
+        <p>We are more than a restaurant. We are a space for <strong>family, celebration, and community</strong> — complete with a fully equipped banquet hall for weddings, corporate events, and every milestone that deserves a feast.</p>
+      </div>
+      <div class="stats-grid reveal reveal-delay-2">
+        <div class="stat-card">
+          <div class="stat-number" data-target="10"><sup>10+</sup></div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="100"><sup>100+</sup></div>
+          <div class="stat-label">Menu Items</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="5000"><sup>5000+</sup></div>
+          <div class="stat-label">Happy Guests</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="50"><sup>50+</sup></div>
+          <div class="stat-label">Events Hosted</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE DISHES -->
+<section id="dishes">
+  <div class="section-header">
+    <div class="section-label reveal">Signature Creations</div>
+    <div class="ornament reveal">❧ ✦ ❧</div>
+    <h2 class="section-title reveal">Our <em>Celebrated</em> Dishes</h2>
+    <p class="section-sub reveal reveal-delay-1">Each dish is a masterpiece — slow-cooked, hand-spiced, and served with the warmth of Arabian hospitality.</p>
+  </div>
+  <div class="dishes-grid" style="max-width:1200px;margin:0 auto;">
+    <div class="dish-card reveal">
+      <div class="dish-img-wrap">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" alt="Chicken Mandi — slow-cooked Arabian rice with tender chicken" loading="lazy">
+        <div class="dish-tag">⭐ Best Seller</div>
+      </div>
+      <div class="dish-body">
+        <div class="dish-name">Chicken Mandi</div>
+        <div class="dish-desc">Slow-cooked Yemeni rice with tender whole chicken, smoked in our traditional tandoor with aromatic spices.</div>
+        <div class="dish-footer">
+          <div class="dish-price">₹499 <span>/ platter</span></div>
+          <a href="#location" class="btn-sm">Order Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="dish-card reveal reveal-delay-1">
+      <div class="dish-img-wrap">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=600&q=80" alt="Mutton Mandi — slow-cooked Yemeni lamb platter" loading="lazy">
+        <div class="dish-tag">🔥 Chef's Pick</div>
+      </div>
+      <div class="dish-body">
+        <div class="dish-name">Mutton Mandi</div>
+        <div class="dish-desc">Succulent slow-roasted mutton leg on a bed of fragrant Mandi rice — the crown jewel of Arabian cuisine.</div>
+        <div class="dish-footer">
+          <div class="dish-price">₹699 <span>/ platter</span></div>
+          <a href="#location" class="btn-sm">Order Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="dish-card reveal reveal-delay-2">
+      <div class="dish-img-wrap">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&q=80" alt="Al Faham Chicken — Arabian charcoal-grilled chicken" loading="lazy">
+        <div class="dish-tag">🌟 Arabian Classic</div>
+      </div>
+      <div class="dish-body">
+        <div class="dish-name">Al Faham Chicken</div>
+        <div class="dish-desc">Whole chicken marinated in authentic Arabian spices, charcoal-grilled to smoky perfection. Served with garlic sauce.</div>
+        <div class="dish-footer">
+          <div class="dish-price">₹450 <span>/ full</span></div>
+          <a href="#location" class="btn-sm">Order Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="dish-card reveal">
+      <div class="dish-img-wrap">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1555243896-c709bfa0b564?w=600&q=80" alt="Mixed Grill Platter — BBQ assortment platter" loading="lazy">
+        <div class="dish-tag">👨‍👩‍👧 Family Favourite</div>
+      </div>
+      <div class="dish-body">
+        <div class="dish-name">Mixed Grill Platter</div>
+        <div class="dish-desc">A grand feast of seekh kebabs, shish tawook, kafta, and grilled prawns. Perfect for sharing.</div>
+        <div class="dish-footer">
+          <div class="dish-price">₹899 <span>/ platter</span></div>
+          <a href="#location" class="btn-sm">Order Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="dish-card reveal reveal-delay-1">
+      <div class="dish-img-wrap">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1561043433-aaf687c4cf04?w=600&q=80" alt="BBQ Chicken — marinated BBQ whole chicken" loading="lazy">
+        <div class="dish-tag">🔥 Smoky Special</div>
+      </div>
+      <div class="dish-body">
+        <div class="dish-name">BBQ Chicken</div>
+        <div class="dish-desc">Juicy whole chicken marinated overnight in our secret BBQ spice blend, slow-grilled over open flames.</div>
+        <div class="dish-footer">
+          <div class="dish-price">₹380 <span>/ full</span></div>
+          <a href="#location" class="btn-sm">Order Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="dish-card reveal reveal-delay-2">
+      <div class="dish-img-wrap">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&q=80" alt="Shawarma Plate — Arabian shawarma with garlic sauce" loading="lazy">
+        <div class="dish-tag">⚡ Quick Bite</div>
+      </div>
+      <div class="dish-body">
+        <div class="dish-name">Shawarma Plate</div>
+        <div class="dish-desc">Layers of spiced chicken or mutton slow-roasted on a vertical spit, served with Arabic bread and garlic mayo.</div>
+        <div class="dish-footer">
+          <div class="dish-price">₹180 <span>/ plate</span></div>
+          <a href="#location" class="btn-sm">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section id="why">
+  <div class="geo-bg" style="position:absolute;inset:0;"></div>
+  <div style="position:relative;">
+  <div class="section-header">
+    <div class="section-label reveal">Why Fattoush</div>
+    <div class="ornament reveal">❧ ✦ ❧</div>
+    <h2 class="section-title reveal">The Fattoush <em>Promise</em></h2>
+    <p class="section-sub reveal reveal-delay-1">Every visit is defined by six pillars of excellence that make Fattoush unlike any other dining experience in Chennai.</p>
+  </div>
+  <div class="why-grid" style="max-width:1100px;margin:0 auto;">
+    <div class="why-card reveal"><div class="why-icon">🫙</div><div class="why-title">Authentic Arabian Recipes</div><div class="why-desc">Our recipes travel directly from the kitchens of Riyadh, Sanaa, and Beirut — unchanged and uncompromising in authenticity.</div></div>
+    <div class="why-card reveal reveal-delay-1"><div class="why-icon">🌿</div><div class="why-title">Fresh Ingredients Daily</div><div class="why-desc">We source fresh produce, premium meats, and imported spices every morning to ensure every plate bursts with flavour.</div></div>
+    <div class="why-card reveal reveal-delay-2"><div class="why-icon">👨‍👩‍👧‍👦</div><div class="why-title">Family-Friendly Ambience</div><div class="why-desc">Warm, welcoming spaces designed for families — from cosy booths to open dining halls that feel like home.</div></div>
+    <div class="why-card reveal reveal-delay-3"><div class="why-icon">🏛</div><div class="why-title">Banquet & Event Space</div><div class="why-desc">A fully equipped banquet hall for up to 300 guests, complete with décor packages for every type of celebration.</div></div>
+    <div class="why-card reveal reveal-delay-4"><div class="why-icon">⚡</div><div class="why-title">Quick & Attentive Service</div><div class="why-desc">Our trained team ensures swift, courteous service — your food arrives hot, your experience leaves warm memories.</div></div>
+    <div class="why-card reveal reveal-delay-5"><div class="why-icon">💎</div><div class="why-title">Premium, Affordable Pricing</div><div class="why-desc">Luxury Arabian dining experience without the luxury price tag. Great food for families, friends, and corporate groups alike.</div></div>
+  </div>
+  </div>
+</section>
+
+<!-- MENU SHOWCASE -->
+<section id="menu" style="position:relative;">
+  <div class="geo-overlay"></div>
+  <div style="position:relative;">
+  <div class="section-header">
+    <div class="section-label reveal">Full Menu</div>
+    <div class="ornament reveal" style="color:rgba(212,175,55,0.5);">❧ ✦ ❧</div>
+    <h2 class="section-title reveal">Explore <em>Every Flavour</em></h2>
+    <p class="section-sub reveal reveal-delay-1" style="color:rgba(255,255,255,0.65);">From slow-cooked Arabian classics to fresh Chinese and Indian favourites — there's something for everyone.</p>
+  </div>
+  <div class="tabs reveal">
+    <button class="tab-btn active" onclick="switchTab(this,'arabian')">Arabian Specialities</button>
+    <button class="tab-btn" onclick="switchTab(this,'mandi')">Mandi</button>
+    <button class="tab-btn" onclick="switchTab(this,'grills')">Grills & BBQ</button>
+    <button class="tab-btn" onclick="switchTab(this,'indian')">Indian</button>
+    <button class="tab-btn" onclick="switchTab(this,'chinese')">Chinese</button>
+    <button class="tab-btn" onclick="switchTab(this,'desserts')">Desserts</button>
+    <button class="tab-btn" onclick="switchTab(this,'drinks')">Drinks</button>
+  </div>
+  <div id="tab-arabian" class="tab-content active">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&q=75" alt="Shawarma" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Chicken Shawarma</div><div class="menu-item-price">₹180</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=75" alt="Fattoush Salad" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Fattoush Salad</div><div class="menu-item-price">₹120</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1561043433-aaf687c4cf04?w=400&q=75" alt="Hummus" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Hummus & Bread</div><div class="menu-item-price">₹95</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=400&q=75" alt="Kebab Platter" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Kebab Platter</div><div class="menu-item-price">₹350</div></div></div>
+  </div>
+  <div id="tab-mandi" class="tab-content">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&q=75" alt="Chicken Mandi" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Chicken Mandi (Full)</div><div class="menu-item-price">₹499</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=400&q=75" alt="Mutton Mandi" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Mutton Mandi (Full)</div><div class="menu-item-price">₹699</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=75" alt="Chicken Mandi Half" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Chicken Mandi (Half)</div><div class="menu-item-price">₹270</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=400&q=75" alt="Mandi Rice" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Mandi Rice (Plain)</div><div class="menu-item-price">₹180</div></div></div>
+  </div>
+  <div id="tab-grills" class="tab-content">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1555243896-c709bfa0b564?w=400&q=75" alt="Mixed Grill" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Mixed Grill Platter</div><div class="menu-item-price">₹899</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400&q=75" alt="Al Faham" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Al Faham Chicken</div><div class="menu-item-price">₹450</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1561043433-aaf687c4cf04?w=400&q=75" alt="BBQ Chicken" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">BBQ Chicken</div><div class="menu-item-price">₹380</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&q=75" alt="Seekh Kebab" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Seekh Kebab (6 pcs)</div><div class="menu-item-price">₹220</div></div></div>
+  </div>
+  <div id="tab-indian" class="tab-content">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=75" alt="Chicken Biryani" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Chicken Biryani</div><div class="menu-item-price">₹220</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=75" alt="Butter Chicken" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Butter Chicken</div><div class="menu-item-price">₹260</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&q=75" alt="Dal Makhani" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Dal Makhani</div><div class="menu-item-price">₹160</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=75" alt="Naan" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Garlic Naan (2 pcs)</div><div class="menu-item-price">₹80</div></div></div>
+  </div>
+  <div id="tab-chinese" class="tab-content">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1552611052-33e04de081de?w=400&q=75" alt="Fried Rice" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Chicken Fried Rice</div><div class="menu-item-price">₹180</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&q=75" alt="Noodles" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Hakka Noodles</div><div class="menu-item-price">₹160</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400&q=75" alt="Manchurian" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Gobi Manchurian</div><div class="menu-item-price">₹140</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=75" alt="Spring Roll" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Spring Rolls (4 pcs)</div><div class="menu-item-price">₹120</div></div></div>
+  </div>
+  <div id="tab-desserts" class="tab-content">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=75" alt="Umm Ali" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Umm Ali</div><div class="menu-item-price">₹150</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=75" alt="Baklava" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Baklava (6 pcs)</div><div class="menu-item-price">₹180</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=75" alt="Ice Cream" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Arabic Ice Cream</div><div class="menu-item-price">₹95</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=75" alt="Kunafa" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Kunafa</div><div class="menu-item-price">₹130</div></div></div>
+  </div>
+  <div id="tab-drinks" class="tab-content">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=400&q=75" alt="Mango Juice" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Fresh Mango Juice</div><div class="menu-item-price">₹80</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=75" alt="Laban" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Laban (Salted Lassi)</div><div class="menu-item-price">₹60</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=75" alt="Arabic Coffee" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Arabic Qahwa</div><div class="menu-item-price">₹70</div></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1534353473418-4cfa0c0d84b5?w=400&q=75" alt="Karak Tea" loading="lazy"><div class="menu-item-body"><div class="menu-item-name">Karak Chai</div><div class="menu-item-price">₹50</div></div></div>
+  </div>
+  </div>
+</section>
+
+<!-- BANQUET -->
+<section id="banquet">
+  <div class="banquet-bg"></div>
+  <div class="banquet-overlay"></div>
+  <div class="banquet-content">
+    <div class="section-label">Premium Events</div>
+    <div class="ornament" style="text-align:left;color:rgba(212,175,55,0.5);">❧ ✦ ❧</div>
+    <h2 class="section-title">Your Celebration<br>Deserves a <em>Grand Stage</em></h2>
+    <p>Our fully air-conditioned banquet hall accommodates up to 300 guests, offering world-class catering, elegant décor packages, and dedicated event coordinators to make every moment unforgettable.</p>
+    <div class="banquet-features">
+      <div class="banquet-feature">Birthday Parties & Milestones</div>
+      <div class="banquet-feature">Corporate Lunch & Dinners</div>
+      <div class="banquet-feature">Family Gatherings & Reunions</div>
+      <div class="banquet-feature">Wedding Celebrations</div>
+      <div class="banquet-feature">Aqeeqah & Walima Events</div>
+      <div class="banquet-feature">Live Catering & Buffets</div>
+    </div>
+    <a href="tel:+919876543210" class="btn-primary" style="display:inline-flex;">📞 Book Your Event</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header">
+    <div class="section-label reveal">Photo Gallery</div>
+    <div class="ornament reveal">❧ ✦ ❧</div>
+    <h2 class="section-title reveal">A Feast for the <em>Eyes</em></h2>
+  </div>
+  <div class="gallery-filter reveal">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Food</button>
+    <button class="filter-btn">Restaurant</button>
+    <button class="filter-btn">Banquet</button>
+    <button class="filter-btn">Events</button>
+  </div>
+  <div class="masonry">
+    <div class="masonry-item reveal" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=500&q=75" alt="Chicken Mandi platter" loading="lazy"></div>
+    <div class="masonry-item reveal reveal-delay-1" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=75" alt="Restaurant dining hall" loading="lazy"></div>
+    <div class="masonry-item reveal reveal-delay-2" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=75" alt="Arabian food spread" loading="lazy"></div>
+    <div class="masonry-item reveal reveal-delay-3" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500&q=75" alt="Grilled chicken" loading="lazy"></div>
+    <div class="masonry-item reveal" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500&q=75" alt="Banquet hall setup" loading="lazy"></div>
+    <div class="masonry-item reveal reveal-delay-1" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500&q=75" alt="Shawarma station" loading="lazy"></div>
+    <div class="masonry-item reveal reveal-delay-2" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1561043433-aaf687c4cf04?w=500&q=75" alt="BBQ grill station" loading="lazy"></div>
+    <div class="masonry-item reveal reveal-delay-3" onclick="openLightbox(this)"><img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=500&q=75" alt="Mutton curry" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-header">
+    <div class="section-label reveal">Customer Stories</div>
+    <div class="ornament reveal">❧ ✦ ❧</div>
+    <h2 class="section-title reveal">What Our <em>Guests</em> Say</h2>
+    <p class="section-sub reveal reveal-delay-1">Thousands of satisfied guests across Chennai — read what they love about Fattoush.</p>
+  </div>
+  <div class="reviews-carousel">
+    <div class="reviews-track">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The Mutton Mandi is absolutely divine. I've had Mandi across the UAE and this rivals the best. The meat falls right off the bone, the rice is aromatic, and the atmosphere feels genuinely Arabian. Our family visits every week now!"</p>
+        <div class="review-footer">
+          <div class="review-avatar">AK</div>
+          <div><div class="review-name">Ahmed Khalid</div><div class="review-date">2 weeks ago</div></div>
+          <div class="review-google">🔵 Google</div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Hosted my daughter's wedding reception here — the banquet hall was stunning, the catering was impeccable, and the team handled everything. Every guest complimented the food. Fattoush truly went above and beyond for us!"</p>
+        <div class="review-footer">
+          <div class="review-avatar">SR</div>
+          <div><div class="review-name">Shahana Rashid</div><div class="review-date">1 month ago</div></div>
+          <div class="review-google">🔵 Google</div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Al Faham chicken is the best I've had in Chennai — smoky, perfectly spiced, served piping hot. The service is warm and attentive. It's the kind of place where you feel at home the moment you walk in. Highly recommend!"</p>
+        <div class="review-footer">
+          <div class="review-avatar">MF</div>
+          <div><div class="review-name">Mohammed Farhan</div><div class="review-date">3 weeks ago</div></div>
+          <div class="review-google">🔵 Google</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="section-header">
+    <div class="section-label reveal">Find Us</div>
+    <div class="ornament reveal">❧ ✦ ❧</div>
+    <h2 class="section-title reveal">Visit <em>Fattoush</em></h2>
+  </div>
+  <div class="location-grid">
+    <div class="location-info reveal">
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Address</div>
+          <div class="info-value">Fattoush Restaurant & Banquet<br>Mount Road, Anna Salai<br>Chennai, Tamil Nadu 600 002</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-value">+91 98765 43210<br>+91 44 2345 6789</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-label">Opening Hours</div>
+          <div class="info-value">Monday – Sunday<br>11:00 AM – 11:30 PM<br><span style="color:var(--orange);font-size:0.82rem;">Banquet bookings: 9 AM – 8 PM</span></div>
+        </div>
+      </div>
+      <div class="location-btns">
+        <a href="https://wa.me/919876543210?text=Hi%2C%20I%27d%20like%20to%20reserve%20a%20table%20at%20Fattoush" class="btn-wa" target="_blank" rel="noopener">💬 WhatsApp Booking</a>
+        <a href="tel:+919876543210" class="btn-call">📞 Call Now</a>
+        <a href="https://maps.google.com/?q=Fattoush+Restaurant+Chennai" class="btn-dir" target="_blank" rel="noopener">🗺 Get Directions</a>
+      </div>
+    </div>
+    <div class="map-wrap reveal reveal-delay-1">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.9!2d80.2707!3d13.0600!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267b8a0e4b781%3A0x8f9bc8b1e7e46a7b!2sAnna%20Salai%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Fattoush Restaurant location on Google Maps"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">Fattoush <span style="color:var(--orange);">&</span> Banquet</span>
+      <p>Serving authentic Arabian flavours to Chennai with warmth, passion, and the finest ingredients since 2014. Dine in, takeaway, or let us cater your next celebration.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+        <a href="#" class="social-btn" aria-label="Facebook">👍</a>
+        <a href="#" class="social-btn" aria-label="YouTube">▶️</a>
+        <a href="https://wa.me/919876543210" class="social-btn" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#dishes">Signature Dishes</a></li>
+        <li><a href="#menu">Full Menu</a></li>
+        <li><a href="#banquet">Banquet Hall</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Cuisine</h4>
+      <ul>
+        <li><a href="#menu">Arabian Specialities</a></li>
+        <li><a href="#menu">Mandi & Rice</a></li>
+        <li><a href="#menu">Grills & BBQ</a></li>
+        <li><a href="#menu">Indian Cuisine</a></li>
+        <li><a href="#menu">Chinese Cuisine</a></li>
+        <li><a href="#menu">Desserts & Drinks</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Stay Connected</h4>
+      <p style="font-size:0.85rem;color:rgba(255,255,255,0.55);margin-bottom:0.8rem;line-height:1.6;">Subscribe for exclusive offers, new menu launches, and event updates.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+        <button type="submit">→</button>
+      </form>
+      <div style="margin-top:1.2rem;font-size:0.82rem;color:rgba(255,255,255,0.45);">
+        📍 Anna Salai, Chennai 600 002<br>
+        📞 +91 98765 43210
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Fattoush Restaurant & Banquet. All rights reserved.</span>
+    <span>Crafted with ❤️ for the love of Arabian food</span>
+  </div>
+</footer>
+
+<script>
+// Loader
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    document.getElementById('heroBg').classList.add('loaded');
+  }, 2100);
+});
+
+// Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile nav
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('#navLinks a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+// Particles
+const particleContainer = document.getElementById('particles');
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  const size = Math.random() * 6 + 2;
+  p.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random() * 100}%;
+    animation-duration:${Math.random() * 12 + 8}s;
+    animation-delay:${Math.random() * 8}s;
+    opacity:${Math.random() * 0.6 + 0.2};
+  `;
+  particleContainer.appendChild(p);
+}
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// Counter animation
+function animateCounter(el, target, suffix) {
+  let start = 0;
+  const step = target / 50;
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.querySelector('sup').textContent = Math.floor(start) + suffix;
+  }, 30);
+}
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const num = e.target.dataset.target;
+      const suffix = num >= 1000 ? '+' : '+';
+      animateCounter(e.target, parseInt(num), suffix);
+      statsObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-number[data-target]').forEach(el => statsObserver.observe(el));
+
+// Menu tabs
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+// Lightbox
+function openLightbox(el) {
+  const img = el.querySelector('img');
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox-img').alt = img.alt;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// Gallery filter (visual only)
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Parallax hero
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const heroBg = document.getElementById('heroBg');
+  if (heroBg && scrollY < window.innerHeight) {
+    heroBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+  }
+});
+</script>
+</body>
+</html>
